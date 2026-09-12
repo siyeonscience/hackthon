@@ -1,0 +1,211 @@
+:root {
+  --font-family: "Pretendard", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  
+  /* Primary & Slate Palette */
+  --bg-main: #f8fafc;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f1f5f9;
+  --bg-muted: #f1f5f9;
+  --bg-subtle: #f8fafc;
+  
+  --border-light: #e2e8f0;
+  --border-strong: #cbd5e1;
+  --border-focus: #3b82f6;
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Accent Colors */
+  --brand-50: #eff6ff;
+  --brand-100: #dbeafe;
+  --brand-500: #3b82f6;
+  --brand-600: #2563eb;
+  --brand-700: #1d4ed8;
+
+  /* Lock / Pin State */
+  --lock-bg: #fffbeb;
+  --lock-border: #fcd34d;
+  --lock-text: #b45309;
+  --lock-badge: #d97706;
+
+  /* Selected State */
+  --select-bg: #eff6ff;
+  --select-border: #3b82f6;
+
+  /* Empty Seat */
+  --empty-bg: #f8fafc;
+  --empty-border: #cbd5e1;
+  --empty-text: #94a3b8;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.05);
+  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+}
+
+/* Animations */
+@keyframes card-shuffle {
+  0% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  25% {
+    transform: scale(0.94) translateY(-6px) rotate(-2deg);
+    opacity: 0.7;
+    filter: blur(0.5px);
+  }
+  50% {
+    transform: scale(0.96) translateY(4px) rotate(2deg);
+    opacity: 0.6;
+    filter: blur(1px);
+  }
+  75% {
+    transform: scale(0.95) translateY(-3px) rotate(-1deg);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+    opacity: 1;
+    filter: none;
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes lock-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+}
+
+@keyframes pulse-highlight {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+  }
+}
+
+.anim-shuffle {
+  animation: card-shuffle 0.4s ease-in-out infinite;
+}
+
+.anim-pop {
+  animation: pop-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.anim-lock {
+  animation: lock-bounce 0.3s ease-out;
+}
+
+/* Print Optimization */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .classroom-board {
+    border-color: #000000 !important;
+    color: #000000 !important;
+    background: #f1f5f9 !important;
+  }
+
+  .seat-card {
+    border: 1.5px solid #0f172a !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    break-inside: avoid;
+  }
+
+  .seat-card.is-empty {
+    border: 1px dashed #94a3b8 !important;
+    background: #f8fafc !important;
+  }
+
+  .seat-card.is-locked {
+    border: 2px solid #0f172a !important;
+  }
+
+  .seat-number-badge {
+    background: #e2e8f0 !important;
+    color: #0f172a !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .seat-student-name {
+    font-size: 15pt !important;
+    font-weight: 700 !important;
+    color: #000000 !important;
+  }
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
+}
